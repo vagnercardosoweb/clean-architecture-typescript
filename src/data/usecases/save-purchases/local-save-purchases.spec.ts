@@ -1,6 +1,5 @@
-interface CacheStore {
-  delete: (key: string) => void;
-}
+import { CacheStore } from '@/data/protocols';
+import { LocalSavePurchases } from '@/data/usecases';
 
 class CacheStoreSpy implements CacheStore {
   public key: string;
@@ -9,15 +8,6 @@ class CacheStoreSpy implements CacheStore {
   delete(key: string): void {
     this.key = key;
     this.deleteCallsCount++;
-  }
-}
-
-class LocalSavePurchases {
-  constructor(private readonly cacheStore: CacheStore) {
-  }
-
-  async save(): Promise<void> {
-    this.cacheStore.delete('purchases');
   }
 }
 
