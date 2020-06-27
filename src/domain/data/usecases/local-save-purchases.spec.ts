@@ -1,11 +1,13 @@
 interface CacheStore {
-  delete: () => void;
+  delete: (key: string) => void;
 }
 
 class CacheStoreSpy implements CacheStore {
+  public key: string;
   public deleteCallsCount: number = 0;
 
-  delete(): void {
+  delete(key: string): void {
+    this.key = key;
     this.deleteCallsCount++;
   }
 }
@@ -15,7 +17,7 @@ class LocalSavePurchases {
   }
 
   async save(): Promise<void> {
-    this.cacheStore.delete();
+    this.cacheStore.delete('purchases');
   }
 }
 
@@ -44,5 +46,13 @@ describe('LocalSavePurchases', () => {
     await savePurchases.save();
 
     expect(cacheStore.deleteCallsCount).toBe(1);
+  });
+
+  test('should call delete with correct key', async () => {
+    const { cacheStore, savePurchases } = makeSavePurchases();
+
+    await savePurchases.save();
+
+    expect(cacheStore.key).toBe('purchases');
   });
 });
