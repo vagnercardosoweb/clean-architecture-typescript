@@ -3,9 +3,10 @@ import { SavePurchases } from '@/domain/usecases/save-purchases';
 
 export class CacheStoreSpy implements CacheStore {
   public insertKey: string;
-  public deleteKey: string;
   public insertValues: SavePurchases.Params[] = [];
   public insertCallsCount: number = 0;
+
+  public deleteKey: string;
   public deleteCallsCount: number = 0;
 
   delete(key: string): void {
