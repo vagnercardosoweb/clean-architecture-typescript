@@ -46,13 +46,6 @@ describe('LocalSavePurchases', () => {
     await savePurchases.save();
 
     expect(cacheStore.deleteCallsCount).toBe(1);
-  });
-
-  test('should call delete with correct key', async () => {
-    const { cacheStore, savePurchases } = makeSavePurchases();
-
-    await savePurchases.save();
-
     expect(cacheStore.key).toBe('purchases');
   });
 });
