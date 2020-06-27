@@ -1,6 +1,7 @@
 import { CacheStore } from '@/data/protocols';
 import { LocalSavePurchases } from '@/data/usecases';
 import { SavePurchases } from '@/domain/usecases/save-purchases';
+import { mockPurchases } from '@/data/tests/mock-purchases';
 
 class CacheStoreSpy implements CacheStore {
   public insertKey: string;
@@ -32,14 +33,6 @@ class CacheStoreSpy implements CacheStore {
     });
   }
 }
-
-// @ts-ignore
-const mockArrayPurchases = Array.from(Array(2), (_, i) => i + 1);
-const mockPurchases = (): SavePurchases.Params[] => mockArrayPurchases.map(key => ({
-  id: `${key + 1}`,
-  date: new Date(),
-  value: key * 20
-}));
 
 type SavePurchasesTypes = {
   cacheStore: CacheStoreSpy;
