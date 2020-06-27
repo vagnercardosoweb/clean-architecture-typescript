@@ -1,7 +1,6 @@
 import { CacheStore } from '@/data/protocols';
 import { LocalSavePurchases } from '@/data/usecases';
 import { SavePurchases } from '@/domain/usecases/save-purchases';
-import mock = jest.mock;
 
 class CacheStoreSpy implements CacheStore {
   public insertKey: string;
